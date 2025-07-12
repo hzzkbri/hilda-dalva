@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kita Berdua</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(to right, #fff1f9, #ffe4f0);
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      padding: 40px;
+      color: #ad1457;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 36px;
+      margin-bottom: 30px;
+    }
+
+    .countdown {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .reveal-button, .next-button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 20px;
+      background-color: #d81b60;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .reveal-button:hover,
+    .next-button:hover {
+      background-color: #ad1457;
+    }
+
+    .slideshow-container {
+      display: none;
+      position: relative;
+      max-width: 600px;
+      margin: 40px auto;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      transition: opacity 0.5s ease-in-out;
+      border-radius: 15px;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .photo-caption {
+      font-size: 20px;
+      margin-top: 10px;
+      color: #880e4f;
+    }
+
+    .slide-buttons {
+      margin-top: 15px;
+    }
+
+    .slide-btn {
+      padding: 8px 16px;
+      font-size: 14px;
+      background-color: #f06292;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    .slide-btn:hover {
+      background-color: #e91e63;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Hari-Hari Kita & Rasa Sayang Aku 🤍</h1>
+
+  <div class="countdown">
+    Hari kita pacaran: <span id="dayCount">1</span><br>
+    Jumlah 🤍 aku ke kamu: <span id="loveCount">1</span>
+  </div>
+
+  <button class="reveal-button" onclick="revealPhotos()">Apa ini?</button>
+
+  <div id="slideshow" class="slideshow-container">
+    <img class="slide active" src="assets/foto kita (1).jpg" />
+    <img class="slide" src="assets/foto kita (2).jpg" />
+    <img class="slide" src="assets/foto kita (3).jpg" />
+    <img class="slide" src="assets/foto kita (4).jpg" />
+    <img class="slide" src="assets/foto kita (5).jpg" />
+    <img class="slide" src="assets/foto kita (6).jpg" />
+    <img class="slide" src="assets/foto kita (7).jpg" />
+    
+    <div class="slide-buttons">
+      <button class="slide-btn" onclick="changeSlide(-1)">←</button>
+      <button class="slide-btn" onclick="changeSlide(1)">→</button>
+    </div>
+
+    <div class="photo-caption">sayaaaang fotooooo" kitaaaaaaa 🤍🤍</div>
+  </div>
+
+  <a href="halaman5.html">
+    <button class="next-button">Lanjut ➤</button>
+  </a>
+
+  <script>
+    let day = 1;
+    let love = 1;
+
+    // Speed up counter
+    setInterval(() => {
+      if (day < 71) {
+        day++;
+        document.getElementById("dayCount").textContent = day;
+      }
+    }, 30); // super cepat
+
+    setInterval(() => {
+      love++;
+      document.getElementById("loveCount").textContent = love;
+    }, 50); // makin cepet
+
+    // Reveal slideshow
+    function revealPhotos() {
+      document.getElementById("slideshow").style.display = "block";
+    }
+
+    // Manual slideshow
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(".slide");
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove("active");
+        if (i === index) {
+          slide.classList.add("active");
+        }
+      });
+    }
+
+    function changeSlide(n) {
+      currentSlide += n;
+      if (currentSlide >= slides.length) currentSlide = 0;
+      if (currentSlide < 0) currentSlide = slides.length - 1;
+      showSlide(currentSlide);
+    }
+  </script>
+
+</body>
+</html>

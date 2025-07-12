@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Selamat Datang Sayang</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #ffeaf7;
+    }
+
+    .loading {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(to bottom right, #fff0f7, #ffd9eb);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #ff69b4;
+      font-size: 1.5em;
+      z-index: 9999;
+    }
+
+    .loading-text {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .love-animation {
+      font-size: 2.5em;
+      letter-spacing: 10px;
+      margin: 10px 0;
+    }
+
+    .show1::after { content: '🤍'; }
+    .show2::after { content: '🤍🤍'; }
+    .show3::after { content: '🤍🤍🤍'; }
+
+    .loading-subtext {
+      font-size: 1.2em;
+      color: #ff85c1;
+      margin-top: 10px;
+    }
+
+    .container {
+      display: none;
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 30px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.2);
+    }
+
+    h2 {
+      text-align: center;
+      color: #d63384;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-top: 15px;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .recaptcha-box {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .popup-content img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      margin: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: 0.3s;
+    }
+
+    .popup-content img:hover {
+      border-color: hotpink;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div class="loading" id="loading">
+    <div class="loading-text">Sabar ya sayang 💖</div>
+    <div id="loveAnim" class="love-animation show1"></div>
+    <div class="loading-subtext">Loading...</div>
+  </div>
+
+  <!-- Form Container -->
+  <div class="container" id="formContainer">
+    <h2>Isi Dulu Yuk Sayang 🥺</h2>
+    <form id="mainForm" onsubmit="return checkForm()">
+      <label>SIAPA NAMA LENGKAP PACARNYA HAZZA?</label>
+      <input type="text" id="nama" required>
+
+      <label>Tanggal Lahir</label>
+      <input type="date" required>
+
+      <label>Makanan Favorit</label>
+      <select required>
+        <option value="">Pilih salah satu</option>
+        <option>Dimsum</option>
+        <option>Nasi Goreng</option>
+        <option>Bakso</option>
+        <option>Mie Ayam</option>
+        <option>Sushi</option>
+        <option>Ayam Geprek</option>
+        <option>Spaghetti</option>
+        <option>Sate Padang</option>
+        <option>Pempek</option>
+        <option>Rendang</option>
+      </select>
+
+      <div class="recaptcha-box" onclick="showCaptcha()">
+        <input type="checkbox" id="dummyCheck" disabled>
+        <label for="dummyCheck">I'm not a robot</label>
+      </div>
+
+      <button type="submit" id="submitBtn" style="display:none;margin-top:20px;">Lanjut ke Halaman Cinta 💘</button>
+    </form>
+  </div>
+
+  <!-- Recaptcha Popup -->
+  <div class="popup" id="captchaPopup">
+    <div class="popup-content">
+      <h3>ORANG TERGANTENG MENURUT KAMU</h3>
+      <div>
+        <img src="assets/Hazza.jpg" onclick="validateCaptcha(true)">
+        <img src="assets/gibran.jpg" onclick="validateCaptcha(false)">
+        <img src="assets/justin.jpg" onclick="validateCaptcha(false)">
+        <img src="assets/curry.jpg" onclick="validateCaptcha(false)">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let step = 1;
+    const loveAnim = document.getElementById("loveAnim");
+
+    // Love looping
+    setInterval(() => {
+      loveAnim.className = "love-animation show" + step;
+      step = (step % 3) + 1;
+    }, 500);
+
+    // Delay loading screen 7 detik
+    setTimeout(() => {
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("formContainer").style.display = "block";
+    }, 7000);
+
+    function showCaptcha() {
+      document.getElementById("captchaPopup").style.display = "flex";
+    }
+
+    function validateCaptcha(correct) {
+      if (correct) {
+        document.getElementById("captchaPopup").style.display = "none";
+        document.getElementById("dummyCheck").checked = true;
+        document.getElementById("submitBtn").style.display = "block";
+      } else {
+        alert("Aduh bukan itu orangnya 🥺 Coba lagi yaa");
+      }
+    }
+
+    function checkForm() {
+      const nama = document.getElementById("nama").value.trim().toLowerCase();
+      if (nama !== "hilda dalva amalia") {
+        alert("Namanyaa harus lengkap yaa 🥺");
+        return false;
+      }
+      // next page bisa diarahkan di sini misal index.html
+      window.location.href = "index.html";
+      return false;
+    }
+  </script>
+
+</body>
+</html>

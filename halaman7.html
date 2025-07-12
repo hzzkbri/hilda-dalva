@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Surat Perjanjian Cinta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #fffdfb;
+      font-family: 'Roboto Slab', serif;
+      padding: 40px;
+      color: #333;
+    }
+
+    .surat {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      border: 2px solid #e0c7be;
+      padding: 40px 50px;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.05);
+    }
+
+    h1 {
+      text-align: center;
+      font-family: 'Great Vibes', cursive;
+      font-size: 40px;
+      color: #b71c1c;
+      margin-bottom: 0;
+    }
+
+    .nomor {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 5px;
+      color: #888;
+    }
+
+    p {
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    h3 {
+      margin-top: 30px;
+      font-size: 18px;
+      color: #444;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    canvas {
+      border: 1px solid #ccc;
+      margin-top: 15px;
+      border-radius: 5px;
+    }
+
+    .checkbox-area {
+      margin-top: 30px;
+      font-weight: bold;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .from-to {
+      text-align: right;
+      font-style: italic;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="surat">
+  <h1>Surat Perjanjian Cinta</h1>
+  <div class="nomor">No: 001/CINTA-AZZA/2025</div>
+
+  <p>Kepada yang tersayang,</p>
+  <p><strong>Hilda Dalva Amalia</strong></p>
+
+  <p>Dengan sepenuh hati dan cinta yang tulus, aku yang bertanda tangan di bawah ini, <strong>Arlingga Hazza Ikbari</strong>, membuat perjanjian cinta ini sebagai bentuk keseriusan dan komitmen dalam hubungan kita.</p>
+
+  <h3>Pasal A: Komitmen</h3>
+  <ul>
+    <li>Aku akan selalu menjaga kesetiaan dan kepercayaan dalam hubungan ini.</li>
+    <li>Tidak akan ada kata menyerah, hanya ada peluk dan kata "kita pasti bisa".</li>
+  </ul>
+
+  <h3>Pasal B: Kebahagiaan</h3>
+  <ul>
+    <li>Aku berjanji akan membuatmu tersenyum setiap hari.</li>
+    <li>Menjadi sandaranmu di saat kamu sedih, dan jadi alasan kamu bahagia.</li>
+  </ul>
+
+  <h3>Pasal C: Masa Depan</h3>
+  <ul>
+    <li>Kita akan saling dukung dalam mimpi dan tujuan hidup kita.</li>
+    <li>Kita akan tetap bersama, melewati segala suka dan duka, sampai maut memisahkan.</li>
+  </ul>
+
+  <div class="checkbox-area">
+    <input type="checkbox" id="confirmBox">
+    <label for="confirmBox">SAYANG, UDAH DIBACA BENER² KAN SURATNYA?</label>
+  </div>
+
+  <h3>Tanda Tangan:</h3>
+  <canvas id="signatureCanvas" width="400" height="150"></canvas><br>
+
+  <button onclick="downloadSurat()">Download Surat & Lanjut 🤍</button>
+
+  <div class="from-to">
+    Hormat dan cinta selalu,<br>
+    <strong>Arlingga Hazza Ikbari</strong><br>
+    Untuk:<br>
+    <strong>Hilda Dalva Amalia</strong>
+  </div>
+</div>
+
+<script>
+  const canvas = document.getElementById('signatureCanvas');
+  const ctx = canvas.getContext('2d');
+  let isDrawing = false;
+
+  canvas.addEventListener('mousedown', () => isDrawing = true);
+  canvas.addEventListener('mouseup', () => {
+    isDrawing = false;
+    ctx.beginPath();
+  });
+  canvas.addEventListener('mousemove', draw);
+
+  function draw(e) {
+    if (!isDrawing) return;
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#b71c1c';
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(e.offsetX, e.offsetY);
+  }
+
+  function downloadSurat() {
+    const confirm = document.getElementById("confirmBox");
+    if (!confirm.checked) {
+      alert("Sayang, centang dulu ya kotaknya 😚");
+      return;
+    }
+
+    html2canvas(document.querySelector(".surat")).then(canvas => {
+      const link = document.createElement('a');
+      link.download = 'surat_perjanjian_cinta.png';
+      link.href = canvas.toDataURL();
+      link.click();
+
+      setTimeout(() => {
+        window.location.href = "halaman8.html";
+      }, 2000);
+    });
+  }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+</html>
+

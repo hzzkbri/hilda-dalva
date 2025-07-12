@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Terima Kasih Sayang</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom, #ffcde6, #ffeef6);
+      font-family: 'Quicksand', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 60px;
+      color: #ff4da6;
+      margin: 0;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: bold;
+      color: #b3005e;
+      margin: 10px 0 30px 0;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    img {
+      width: 250px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
+      animation: fadeIn 2.5s ease-in-out;
+      z-index: 2;
+    }
+
+    .quote {
+      margin-top: 20px;
+      font-size: 20px;
+      font-style: italic;
+      color: #ff6eb4;
+      text-align: center;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Floating hearts 💖 */
+    .love {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: floatLove 6s linear infinite;
+    }
+
+    @keyframes floatLove {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-700px) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>TERIMA KASIH SAYANG</h1>
+  <h2>HILDA DALVA AMALIA 🫰</h2>
+
+  <img src="assets/hilda.jpg" alt="Hilda Tercinta" />
+
+  <div class="quote">"Kamu selalu ada di akhir hariku, dan jadi alasan untuk selalu tersenyum lagi besoknya."</div>
+
+  <!-- LOVE EXPLOSION EFFECT -->
+  <script>
+    function buatLove() {
+      const love = document.createElement("div");
+      love.classList.add("love");
+      love.style.left = Math.random() * window.innerWidth + "px";
+      love.style.bottom = "-30px";
+      love.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(love);
+
+      setTimeout(() => {
+        love.remove();
+      }, 6000);
+    }
+
+    setInterval(buatLove, 150);
+  </script>
+
+</body>
+</html>

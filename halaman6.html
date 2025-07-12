@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Foto Cantikmu 🤍</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to bottom, #ffeef4, #fff4fa);
+      text-align: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 38px;
+      color: #c2185b;
+      margin-top: 50px;
+    }
+
+    .upload-box {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      padding: 30px;
+      margin: 40px auto;
+      max-width: 400px;
+    }
+
+    input[type="file"] {
+      margin-top: 20px;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 12px 25px;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #preview {
+      margin-top: 20px;
+      max-width: 300px;
+      border-radius: 15px;
+      display: none;
+    }
+
+    /* Ledakan love */
+    .heart {
+      position: fixed;
+      color: white;
+      font-size: 22px;
+      animation: floatUp 4s linear infinite;
+      opacity: 0.9;
+      z-index: 999;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-800px) scale(1.4);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Ambil Foto Cantikmu 🤍</h1>
+  <div class="upload-box">
+    <p>Upload selfie kamu ya sayang~</p>
+    <input type="file" id="fileInput" accept="image/*" />
+    <canvas id="canvas" width="300" height="300" style="display:none;"></canvas>
+    <img id="preview" />
+    <br>
+    <button onclick="generateImage()">Download Foto</button>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const preview = document.getElementById('preview');
+
+    fileInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const img = new Image();
+          img.onload = function () {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+
+            // Tambah teks “KESAYANGANNYA HAZZA”
+            ctx.font = "48px 'Dancing Script'";
+            ctx.fillStyle = "#fff";
+            ctx.strokeStyle = "#e91e63";
+            ctx.lineWidth = 2;
+            ctx.textAlign = "center";
+            ctx.shadowColor = "rgba(0,0,0,0.4)";
+            ctx.shadowBlur = 10;
+            ctx.fillText("KESAYANGANNYA HAZZA", img.width / 2, img.height - 60);
+            ctx.strokeText("KESAYANGANNYA HAZZA", img.width / 2, img.height - 60);
+
+            const dataURL = canvas.toDataURL("image/png");
+            preview.src = dataURL;
+            preview.style.display = "block";
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function generateImage() {
+      const image = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.href = image;
+      link.download = "kesayangannya_hazza.png";
+      link.click();
+
+      boomLove();
+
+      setTimeout(() => {
+        window.location.href = "halaman7.html";
+      }, 3000);
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.top = (Math.random() * 20 + 70) + "vh";
+      heart.style.fontSize = (Math.random() * 20 + 16) + "px";
+      heart.textContent = "🤍";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }
+
+    function boomLove() {
+      for (let i = 0; i < 60; i++) {
+        setTimeout(createHeart, i * 70);
+      }
+    }
+  </script>
+
+</body>
+</html>

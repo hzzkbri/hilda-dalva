@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sayang Maafin Aku</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: linear-gradient(to bottom right, #ffe6e6, #fff0f5);
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      padding: 50px 20px;
+      color: #d32f2f;
+    }
+    h1 {
+      font-size: 48px;
+      margin-bottom: 30px;
+      font-family: 'Pacifico', cursive;
+      animation: fadeInDown 1s ease-in-out;
+    }
+    .sad-emojis {
+      font-size: 24px;
+      margin-bottom: 30px;
+      animation: float 3s infinite ease-in-out;
+    }
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .yes {
+      background-color: #d32f2f;
+      color: white;
+    }
+    .yes:hover {
+      background-color: #c62828;
+    }
+    .no {
+      background-color: #eeeeee;
+      color: #999;
+      cursor: not-allowed;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>SAYAAANG MAAFIN AKU YAAA</h1>
+  <div class="sad-emojis">🥺💔😭💌💭</div>
+
+  <div class="button-group">
+    <a href="halaman2.html">
+      <button class="yes">Iyaaa aku maafin 🥹</button>
+    </a>
+    <button class="no">Engga mau 😠</button>
+  </div>
+
+  <footer>
+    buat kamu yang paling aku cintai di dunia ini 🤍
+  </footer>
+
+</body>
+</html>
